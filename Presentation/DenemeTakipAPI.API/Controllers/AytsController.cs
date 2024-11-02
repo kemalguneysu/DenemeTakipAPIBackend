@@ -38,7 +38,7 @@ namespace DenemeTakipAPI.API.Controllers
             GetAllAytQueryResponse response = await _mediator.Send(getAllAytQueryRequest);
             return Ok(response);
         }
-
+        [HttpPost("[action]")]
         public async Task<IActionResult> UpdateAyt(UpdateAytCommandRequest updateAytCommandRequest)
         {
             UpdateAytCommandResponse updateAytCommandResponse = await _mediator.Send(updateAytCommandRequest);
