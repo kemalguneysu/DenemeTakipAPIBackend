@@ -1,4 +1,5 @@
 ﻿using DenemeTakipAPI.Application.Abstraction.Services;
+using DotNetEnv;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace DenemeTakipAPI.Infrastructure.Services
         public MailService(IConfiguration configuration)
         {
             _configuration = configuration;
+            Env.Load();
         }
 
         public async Task SendMailAsync(string to, string subject, string body, bool isBodyHtml = true)
@@ -32,13 +34,13 @@ namespace DenemeTakipAPI.Infrastructure.Services
                 mail.To.Add(to);
             mail.Subject = subject;
             mail.Body = body;
-            mail.From = new(_configuration["Mail:Username"], "Deneme Takip", System.Text.Encoding.UTF8);
+            mail.From = new(Environment.GetEnvironmentVariable("Mail__Username"), "Deneme Takip", System.Text.Encoding.UTF8);
 
             SmtpClient smtp = new();
-            smtp.Credentials = new NetworkCredential(_configuration["Mail:Username"], _configuration["Mail:Password"]);
+            smtp.Credentials = new NetworkCredential(Environment.GetEnvironmentVariable("Mail__Username"), Environment.GetEnvironmentVariable("Mail__Password"));
             smtp.Port = 587;
             smtp.EnableSsl = true;
-            smtp.Host = _configuration["Mail:Host"];
+            smtp.Host = Environment.GetEnvironmentVariable("Mail__Host");
             await smtp.SendMailAsync(mail);
         }
 

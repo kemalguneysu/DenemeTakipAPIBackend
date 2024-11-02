@@ -15,14 +15,14 @@ using DenemeTakipAPI.Application.Validators.TytValidators;
 using DenemeTakipAPI.Infrastructure.Filters;
 using DenemeTakipAPI.API;
 using DenemeTakipAPI.SignalR.Hubs;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
+var configurationBuilder = new ConfigurationBuilder();
+configurationBuilder.AddEnvironmentVariables();
+Env.Load();
+builder.Configuration.AddConfiguration(configurationBuilder.Build());
 
-// Add services to the container.
-
-//builder.Services.AddControllers().AddJsonOptions(x =>
-//   x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve); ;
-//builder.Services.AddControllers();
 builder.Services.AddControllers(options=>options.Filters.Add<ValidationFilters>())
     .AddFluentValidation(configuration=>configuration.RegisterValidatorsFromAssemblyContaining<CreateTytValidators>())
     .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true)
@@ -91,6 +91,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Api v1"));
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();

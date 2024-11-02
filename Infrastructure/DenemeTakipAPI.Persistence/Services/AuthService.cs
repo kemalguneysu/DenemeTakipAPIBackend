@@ -2,6 +2,7 @@
 using DenemeTakipAPI.Application.Abstraction.Token;
 using DenemeTakipAPI.Application.DTOs;
 using DenemeTakipAPI.Domain.Entities.Identity;
+using DotNetEnv;
 using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
@@ -62,13 +63,14 @@ namespace DenemeTakipAPI.Persistence.Services
             _userService = userService;
             _configuration = configuration;
             _mailService = mailService;
+            Env.Load();
         }
 
         public async Task<Token> GoogleLoginAsync(string idToken, int accessTokenLifeTime)
         {
             var settings = new GoogleJsonWebSignature.ValidationSettings()
             {
-                Audience = new List<string> { _configuration["ExternalLoginSettings:Google:Client_ID"] }
+                Audience = new List<string> { Environment.GetEnvironmentVariable("ExternalLoginSettings__Google__ClientId") }
             };
 
             var payload = await GoogleJsonWebSignature.ValidateAsync(idToken, settings);

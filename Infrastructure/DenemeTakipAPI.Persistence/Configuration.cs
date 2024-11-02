@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using DotNetEnv;
 
 namespace DenemeTakipAPI.Persistence
 {
@@ -14,18 +15,9 @@ namespace DenemeTakipAPI.Persistence
         {
             get
             {
-                ConfigurationManager configurationManager = new();
-                try
-                {
-                    configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../Presentation/DenemeTakipAPI.API"));
-                    configurationManager.AddJsonFile("appsettings.json");
-                }
-                catch
-                {
-                    configurationManager.AddJsonFile("appsettings.Production.json");
-                }
+                Env.Load();
 
-                return configurationManager.GetConnectionString("PostgreSQL");
+                return Environment.GetEnvironmentVariable("ConnectionStrings__PostgreSQL");
             }
         }
         static public string MySQLConnectionString
