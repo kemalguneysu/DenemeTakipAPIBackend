@@ -40,11 +40,15 @@
 # Local History for Visual Studio
 .history/
 
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+
 # Environment Variables
 .env
 .env.local
 .env.*.local
-
+.
 # macOS
 .DS_Store
 
