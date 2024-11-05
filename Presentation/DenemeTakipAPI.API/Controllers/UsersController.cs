@@ -1,7 +1,9 @@
 ﻿using DenemeTakipAPI.Application.Abstraction.Services;
 using DenemeTakipAPI.Application.Features.Commands.User.AssignRoleToUser;
 using DenemeTakipAPI.Application.Features.Commands.User.CreateUserer;
+using DenemeTakipAPI.Application.Features.Commands.User.DeleteAccount;
 using DenemeTakipAPI.Application.Features.Commands.User.UpdatePassword;
+using DenemeTakipAPI.Application.Features.Commands.User.UpdateUserPassword;
 using DenemeTakipAPI.Application.Features.Queries.Konu.GetAllKonu;
 using DenemeTakipAPI.Application.Features.Queries.Users.GetAllUsers;
 using DenemeTakipAPI.Application.Features.Queries.Users.GetUserById;
@@ -20,11 +22,13 @@ namespace DenemeTakipAPI.API.Controllers
     {
         readonly IMediator _mediator;
         readonly IMailService _mailService;
+        readonly IUserService _userService;
 
-        public UsersController(IMediator mediator, IMailService mailService)
+        public UsersController(IMediator mediator, IMailService mailService, IUserService userService)
         {
             _mediator = mediator;
             _mailService = mailService;
+            _userService = userService;
         }
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateUser(CreateUserCommandRequest createUserCommandRequest)
@@ -74,6 +78,37 @@ namespace DenemeTakipAPI.API.Controllers
             UpdatePasswordCommandResponse response = await _mediator.Send(updatePasswordCommandRequest);
             return Ok(response);
         }
+        [HttpDelete("[action]")]
+        [Authorize(AuthenticationSchemes = "Admin")]
 
+        public async Task<IActionResult> DeleteAccount( DeleteAccountCommandRequest deleteAccountCommandRequest)
+        {
+            DeleteAccountCommandResponse response = await _mediator.Send(deleteAccountCommandRequest);
+            return Ok(response);
+        }
+        [HttpPost("[action]")]
+        [Authorize(AuthenticationSchemes = "Admin")]
+
+        public async Task<IActionResult> UpdateUserPassword([FromBody] UpdateUserPasswordCommandRequest updateUserPasswordCommandRequest)
+        {
+            UpdateUserPasswordCommandResponse response = await _mediator.Send(updateUserPasswordCommandRequest);
+            return Ok(response);
+        }
+        [HttpGet("[action]")]
+        [Authorize(AuthenticationSchemes = "Admin")]
+        public async Task<IActionResult> GetMyDatas([FromQuery]string? userId)
+        {
+            string zipPath = await _userService.ExportUserDataAsZipAsync(userId);
+            var fileStream = new FileStream(zipPath, FileMode.Open);
+            Task.Run(() =>
+            {
+                Task.Delay(TimeSpan.FromDays(1)).Wait();
+                if (System.IO.File.Exists(zipPath))
+                {
+                    System.IO.File.Delete(zipPath);
+                }
+            });
+            return File(fileStream, "application/zip", Path.GetFileName(zipPath));
+        }
     }
 }

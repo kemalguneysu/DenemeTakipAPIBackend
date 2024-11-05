@@ -448,7 +448,7 @@ namespace DenemeTakipAPI.Persistence.Services
         public async Task<ListTytAnaliz> GetTytNetAnaliz(int denemeSayisi, string? dersAdi)
         {
             var user = await ContextUser();
-            var query = _tytReadRepository.GetWhere(u => u.User == user).OrderByDescending(u=>u.CreatedDate).Take(denemeSayisi).AsQueryable();
+            var query = _tytReadRepository.GetWhere(u => u.User == user).OrderByDescending(u=>u.CreatedDate).Take(denemeSayisi).OrderBy(u=>u.CreatedDate).AsQueryable();
             object tyts;
             if(dersAdi!=null)
                 dersAdi = dersAdi.ToLower();
@@ -459,7 +459,8 @@ namespace DenemeTakipAPI.Persistence.Services
                     {
                         Net = u.TurkceDogru - 0.25m * u.TurkceYanlis,
                         Dogru = u.TurkceDogru,
-                        Yanlis = u.TurkceYanlis
+                        Yanlis = u.TurkceYanlis,
+                        Tarih = u.CreatedDate,
                     });
                     return new()
                     {
@@ -471,6 +472,7 @@ namespace DenemeTakipAPI.Persistence.Services
                     {
                         Net = u.MatematikDogru - 0.25m * u.MatematikYanlis,
                         Dogru = u.MatematikDogru,
+                        Tarih = u.CreatedDate,
                         Yanlis = u.MatematikYanlis
                     });
                     return new()
@@ -483,6 +485,7 @@ namespace DenemeTakipAPI.Persistence.Services
                     {
                         Net = u.FenDogru - 0.25m * u.FenYanlis,
                         Dogru = u.FenDogru,
+                        Tarih = u.CreatedDate,
                         Yanlis = u.FenYanlis
                     });
                     return new()
@@ -495,6 +498,7 @@ namespace DenemeTakipAPI.Persistence.Services
                     {
                         Net = u.SosyalDogru - 0.25m * u.SosyalYanlis,
                         Dogru = u.SosyalDogru,
+                        Tarih = u.CreatedDate,
                         Yanlis = u.SosyalYanlis
                     });
                     return new()
@@ -511,6 +515,7 @@ namespace DenemeTakipAPI.Persistence.Services
                                 u.FenDogru - 0.25m * u.FenYanlis,
                         TurkceNet = u.TurkceDogru - 0.25m * u.TurkceYanlis,
                         MatematikNet = u.MatematikDogru - 0.25m * u.MatematikYanlis,
+                        Tarih = u.CreatedDate,
                         SosyalNet = u.SosyalDogru - 0.25m * u.SosyalYanlis,
                         FenNet = u.FenDogru - 0.25m * u.FenYanlis,
                     });

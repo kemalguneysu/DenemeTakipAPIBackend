@@ -29,6 +29,7 @@ namespace DenemeTakipAPI.Domain.Entities.DenemeFolder.TytFolder
 
         public List<Konu>? YanlisKonular { get; set; }
         public List<Konu>? BosKonular { get; set; }
+        public string UserId { get; set; }
         public AppUser User { get; set; }
 
 

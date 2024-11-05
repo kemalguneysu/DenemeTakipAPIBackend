@@ -15,28 +15,35 @@ namespace DenemeTakipAPI.Persistence
         {
             get
             {
-                Env.Load();
+                Env.Load(); 
 
-                return Environment.GetEnvironmentVariable("ConnectionStrings__PostgreSQL");
-            }
-        }
-        static public string MySQLConnectionString
-        {
-            get
-            {
-                ConfigurationManager configurationManager = new();
-                try
+                var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__PostgreSQL");
+
+                if (string.IsNullOrEmpty(connectionString))
                 {
-                    configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../Presentation/DenemeTakipAPI.API"));
-                    configurationManager.AddJsonFile("appsettings.json");
-                }
-                catch
-                {
-                    configurationManager.AddJsonFile("appsettings.Production.json");
+                    throw new InvalidOperationException("Connection string is not set in environment variables.");
                 }
 
-                return configurationManager.GetConnectionString("MySQL");
+                return connectionString;
             }
         }
+        //static public string MySQLConnectionString
+        //{
+        //    get
+        //    {
+        //        ConfigurationManager configurationManager = new();
+        //        try
+        //        {
+        //            configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../Presentation/DenemeTakipAPI.API"));
+        //            configurationManager.AddJsonFile("appsettings.json");
+        //        }
+        //        catch
+        //        {
+        //            configurationManager.AddJsonFile("appsettings.Production.json");
+        //        }
+
+        //        return configurationManager.GetConnectionString("MySQL");
+        //    }
+        //}
     }
 }

@@ -550,7 +550,7 @@ namespace DenemeTakipAPI.Persistence.Services
         public async Task<ListAytAnaliz> GetAytNetAnaliz(int denemeSayisi,string alanTuru,string? dersAdi)
         {
             var user = await ContextUser();
-            var query = _aytReadRepository.GetWhere(u => u.User == user).OrderByDescending(u => u.CreatedDate).Take(denemeSayisi).AsQueryable();
+            var query = _aytReadRepository.GetWhere(u => u.User == user).OrderByDescending(u => u.CreatedDate).Take(denemeSayisi).OrderBy(u => u.CreatedDate).AsQueryable();
             object ayts;
             alanTuru = alanTuru.ToLower();
             if (dersAdi != null)

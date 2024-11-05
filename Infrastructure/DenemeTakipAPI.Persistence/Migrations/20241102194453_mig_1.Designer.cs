@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DenemeTakipAPI.Persistence.Migrations
 {
     [DbContext(typeof(denemeTakipAPIDbContext))]
-    [Migration("20240703143429_mig_1")]
+    [Migration("20241102194453_mig_1")]
     partial class mig_1
     {
         /// <inheritdoc />
@@ -137,6 +137,7 @@ namespace DenemeTakipAPI.Persistence.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -227,6 +228,7 @@ namespace DenemeTakipAPI.Persistence.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -265,14 +267,14 @@ namespace DenemeTakipAPI.Persistence.Migrations
                         new
                         {
                             Id = "a55c5f9f-4f8c-4848-882f-0bcb3ec62171",
-                            ConcurrencyStamp = "53d353df-f0e3-4654-8a0f-2c8b6e885e45",
+                            ConcurrencyStamp = "8c181708-6feb-4999-8173-24646a476851",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "128f0e53-f259-411a-b4be-e050e48c199e",
-                            ConcurrencyStamp = "88df22c1-7f87-45f3-aa81-5e7411c83ca9",
+                            ConcurrencyStamp = "5759e630-5c26-4528-963c-e37a32f0fb58",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -352,15 +354,15 @@ namespace DenemeTakipAPI.Persistence.Migrations
                         {
                             Id = "c5bc8bb5-0f4f-452a-911c-9844f7e2aac7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "083ccfbe-a51c-46e3-9681-69455c7b93c7",
+                            ConcurrencyStamp = "26e01e74-75a5-42f7-a682-f8bc16502fa6",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAENbJ615twdkbjXXwSJGuocqhJsT/STE+1AxGgREKxEusQW3Fo7TfKFsdJGr0pW1TkQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELQcZZGsS8wkuo5QNs4fc+q2WhDhC/QKW0jqTYyU4qB1AwHj+4PFHAuexy82MVTFFw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "57d5ff62-af10-49e1-b9f2-1d8c4087393d",
+                            SecurityStamp = "5e1d5484-2d15-439e-b774-52ab4a11b2e4",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -572,7 +574,9 @@ namespace DenemeTakipAPI.Persistence.Migrations
                 {
                     b.HasOne("DenemeTakipAPI.Domain.Entities.Identity.AppUser", "User")
                         .WithMany("AytDenemes")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -592,7 +596,9 @@ namespace DenemeTakipAPI.Persistence.Migrations
                 {
                     b.HasOne("DenemeTakipAPI.Domain.Entities.Identity.AppUser", "User")
                         .WithMany("TytDenemes")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });

@@ -217,7 +217,7 @@ namespace DenemeTakipAPI.Persistence.Migrations
                     FelsefeYanlis = table.Column<int>(type: "integer", nullable: false),
                     DilDogru = table.Column<int>(type: "integer", nullable: false),
                     DilYanlis = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
@@ -227,7 +227,8 @@ namespace DenemeTakipAPI.Persistence.Migrations
                         name: "FK_AytDenemes_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,7 +244,7 @@ namespace DenemeTakipAPI.Persistence.Migrations
                     FenYanlis = table.Column<int>(type: "integer", nullable: false),
                     SosyalDogru = table.Column<int>(type: "integer", nullable: false),
                     SosyalYanlis = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<string>(type: "text", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
@@ -253,7 +254,8 @@ namespace DenemeTakipAPI.Persistence.Migrations
                         name: "FK_TytDenemes_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -378,14 +380,14 @@ namespace DenemeTakipAPI.Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "128f0e53-f259-411a-b4be-e050e48c199e", "88df22c1-7f87-45f3-aa81-5e7411c83ca9", "user", "USER" },
-                    { "a55c5f9f-4f8c-4848-882f-0bcb3ec62171", "53d353df-f0e3-4654-8a0f-2c8b6e885e45", "admin", "ADMIN" }
+                    { "128f0e53-f259-411a-b4be-e050e48c199e", "5759e630-5c26-4528-963c-e37a32f0fb58", "user", "USER" },
+                    { "a55c5f9f-4f8c-4848-882f-0bcb3ec62171", "8c181708-6feb-4999-8173-24646a476851", "admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToken", "RefreshTokenEndDate", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "c5bc8bb5-0f4f-452a-911c-9844f7e2aac7", 0, "083ccfbe-a51c-46e3-9681-69455c7b93c7", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAENbJ615twdkbjXXwSJGuocqhJsT/STE+1AxGgREKxEusQW3Fo7TfKFsdJGr0pW1TkQ==", null, false, null, null, "57d5ff62-af10-49e1-b9f2-1d8c4087393d", false, "admin" });
+                values: new object[] { "c5bc8bb5-0f4f-452a-911c-9844f7e2aac7", 0, "26e01e74-75a5-42f7-a682-f8bc16502fa6", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAELQcZZGsS8wkuo5QNs4fc+q2WhDhC/QKW0jqTYyU4qB1AwHj+4PFHAuexy82MVTFFw==", null, false, null, null, "5e1d5484-2d15-439e-b774-52ab4a11b2e4", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

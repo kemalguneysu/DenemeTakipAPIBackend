@@ -30,4 +30,8 @@
     <ProjectReference Include="..\..\Infrastructure\DenemeTakipAPI.SignalR\DenemeTakipAPI.SignalR.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\UserDatas\" />
+  </ItemGroup>
+
 </Project>
