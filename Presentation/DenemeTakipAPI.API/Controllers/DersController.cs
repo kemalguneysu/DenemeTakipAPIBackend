@@ -3,9 +3,7 @@ using DenemeTakipAPI.Application.Features.Commands.Ders.CreateKonu;
 using DenemeTakipAPI.Application.Features.Commands.Ders.DeleteDers;
 using DenemeTakipAPI.Application.Features.Commands.Ders.UpdateDers;
 using DenemeTakipAPI.Application.Features.Commands.Konu.CreateKonu;
-using DenemeTakipAPI.Application.Features.Queries.Ders.GetAllAytDersler;
 using DenemeTakipAPI.Application.Features.Queries.Ders.GetAllDers;
-using DenemeTakipAPI.Application.Features.Queries.Ders.GetAllTytDersler;
 using DenemeTakipAPI.Application.Features.Queries.Ders.GetDersById;
 using DenemeTakipAPI.Application.Features.Queries.Konu.GetAllTytKonular;
 using DenemeTakipAPI.Application.Features.Queries.Konu.GetKonuById;
@@ -65,18 +63,8 @@ namespace DenemeTakipAPI.API.Controllers
             UpdateDersCommandResponse response=await _mediator.Send(updateDersCommandRequest);
             return Ok(response);
         }
-        [HttpGet("[action]")]
-        public async Task<IActionResult> GetAllTytDersler([FromQuery] GetAllTytDerslerQueryRequest getAllTytDerslerQueryRequest)
-        {
-            GetAllTytDerslerQueryResponse getAllTytDerslerQueryResponse = await _mediator.Send(getAllTytDerslerQueryRequest);
-            return Ok(getAllTytDerslerQueryResponse);
-        }
-        [HttpGet("[action]")]
-        public async Task<IActionResult> GetAllAytDersler([FromQuery] GetAllAytDerslerQueryRequest getAllAytDerslerQueryRequest)
-        {
-            GetAllAytDerslerQueryResponse getAllAytDerslerQueryResponse = await _mediator.Send(getAllAytDerslerQueryRequest);
-            return Ok(getAllAytDerslerQueryResponse);
-        }
+       
+        
         [HttpGet("[action]")]
         [Authorize(AuthenticationSchemes = "Admin")]
         [Authorize(Roles = "admin")]

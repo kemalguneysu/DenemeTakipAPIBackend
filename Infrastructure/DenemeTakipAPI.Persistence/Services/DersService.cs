@@ -84,21 +84,6 @@ namespace DenemeTakipAPI.Persistence.Services
             };
         }
 
-        public async Task<ListDers> GetAllAytDersler(int page, int size)
-        {
-            var totalCount = await _dersReadRepository.GetAll(false).Where(u => u.IsTyt == false).CountAsync();
-            var aytDersler = await _dersReadRepository.GetAll(false).Where(u => u.IsTyt == false).Skip((page - 1) * size).Take(size).Select(u => new
-            {
-                Id = u.Id.ToString(),
-                DersAdi=u.DersAdi,
-                IsTyt=u.IsTyt
-            }).ToListAsync();
-            return new()
-            {
-                TotalDers = totalCount,
-                Dersler = aytDersler,
-            };
-        }
         //public async Task<List<ListAllDers>> GetAllDersler(bool? isTyt, string? dersAdi, int? page, int? size)
         //{
         //    var query = _dersReadRepository.GetAll(false).AsQueryable();
@@ -182,21 +167,7 @@ namespace DenemeTakipAPI.Persistence.Services
 
         }
 
-        public async Task<ListDers> GetAllTytDersler(int page, int size)
-        {
-            var totalCount = await _dersReadRepository.GetAll(false).Where(u => u.IsTyt == true).CountAsync();
-            var tytDersler = await _dersReadRepository.GetAll(false).Where(u => u.IsTyt == true).Skip((page - 1) * size).Take(size).Select(u => new
-            {
-                Id = u.Id.ToString(),
-                DersAdi = u.DersAdi,
-                IsTyt = u.IsTyt
-            }).ToListAsync();
-            return new()
-            {
-                TotalDers = totalCount,
-                Dersler = tytDersler,
-            };
-        }
+        
 
         public async Task<ListAllDers> GetDersById(string id)
         {
@@ -211,15 +182,7 @@ namespace DenemeTakipAPI.Persistence.Services
             return ders;
         }
 
-        //public async Task UpdateDers(string id, UpdateDers updateDers)
-        //{
-        //    var ders=await _dersReadRepository.GetByIdAsync(id);
-        //    if (ders == null)
-        //        throw new Exception("Ders bulunamadı");
-        //    ders.DersAdi = updateDers.DersAdi;
-        //    ders.IsTyt = updateDers.IsTyt;
-        //    await _dersWriteRepository.SaveAsync();
-        //}
+       
 
         public async Task UpdateDers(UpdateDers updateDers)
         {

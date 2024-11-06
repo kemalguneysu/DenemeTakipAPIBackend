@@ -3,12 +3,14 @@ using DenemeTakipAPI.Application.Repositories.AytRepository;
 using DenemeTakipAPI.Application.Repositories.DersRepository;
 using DenemeTakipAPI.Application.Repositories.KonuRepository;
 using DenemeTakipAPI.Application.Repositories.TytRepository;
+using DenemeTakipAPI.Application.Repositories.UserKonuRepository;
 using DenemeTakipAPI.Domain.Entities.Identity;
 using DenemeTakipAPI.Persistence.Contexts;
 using DenemeTakipAPI.Persistence.Repositories.AytRepository;
 using DenemeTakipAPI.Persistence.Repositories.DersRepository;
 using DenemeTakipAPI.Persistence.Repositories.KonuRepository;
 using DenemeTakipAPI.Persistence.Repositories.TytRepository;
+using DenemeTakipAPI.Persistence.Repositories.UserKonuRepository;
 using DenemeTakipAPI.Persistence.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +54,9 @@ namespace DenemeTakipAPI.Persistence
             services.AddScoped<IDersReadRepository, DersReadRepository>();
             services.AddScoped<IDersWriteRepository, DersWriteRepository>();
 
+            services.AddScoped<IUserKonuReadRepository, UserKonuReadRepository>();
+            services.AddScoped<IUserKonuWriteRepository, UserKonuWriteRepository>();
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
 
@@ -59,6 +64,8 @@ namespace DenemeTakipAPI.Persistence
             services.AddScoped<IAytService, AytService>();
             services.AddScoped<ITytService, TytService>();
             services.AddScoped<IDersService, DersService>();
+            services.AddScoped<IUserKonuService, UserKonuService>();
+
 
         }
     }

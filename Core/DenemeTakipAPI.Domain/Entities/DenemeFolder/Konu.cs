@@ -19,12 +19,12 @@ namespace DenemeTakipAPI.Domain.Entities.DenemeFolder
         public string KonuAdi { get; set; }
         public Ders Ders { get; set; }
         public bool IsTyt { get; set; }
-        public List<AytDeneme> AytDenemesBos { get; set; }
-        public List<AytDeneme> AytDenemesYanlis { get; set; }
+        public List<AytDeneme> AytDenemesBos { get; set; } = new();
+        public List<AytDeneme> AytDenemesYanlis { get; set; } = new();
 
-        public List<TytDeneme> TytDenemesBos { get; set; }
-        public List<TytDeneme> TytDenemesYanlis { get; set; }
-
+        public List<TytDeneme> TytDenemesBos { get; set; } = new();
+        public List<TytDeneme> TytDenemesYanlis { get; set; } = new();
+        public List<UserKonu> UserKonular{ get; set; }=new();
 
     }
 }
