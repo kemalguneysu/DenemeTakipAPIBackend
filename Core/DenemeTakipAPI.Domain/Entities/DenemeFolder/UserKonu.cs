@@ -16,6 +16,5 @@ namespace DenemeTakipAPI.Domain.Entities.DenemeFolder
         public Guid KonuId { get; set; }
         public Konu Konu { get; set; }
 
-        public bool IsCompleted{ get; set; }
     }
 }

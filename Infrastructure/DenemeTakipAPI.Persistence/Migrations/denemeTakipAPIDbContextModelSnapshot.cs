@@ -235,6 +235,32 @@ namespace DenemeTakipAPI.Persistence.Migrations
                     b.ToTable("TytDenemes");
                 });
 
+            modelBuilder.Entity("DenemeTakipAPI.Domain.Entities.DenemeFolder.UserKonu", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("KonuId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KonuId");
+
+                    b.HasIndex("UserId", "KonuId")
+                        .IsUnique();
+
+                    b.ToTable("UserKonular");
+                });
+
             modelBuilder.Entity("DenemeTakipAPI.Domain.Entities.Identity.AppRole", b =>
                 {
                     b.Property<string>("Id")
@@ -264,14 +290,14 @@ namespace DenemeTakipAPI.Persistence.Migrations
                         new
                         {
                             Id = "a55c5f9f-4f8c-4848-882f-0bcb3ec62171",
-                            ConcurrencyStamp = "8c181708-6feb-4999-8173-24646a476851",
+                            ConcurrencyStamp = "7531cfe8-d4bf-46f2-a2f7-9ab0237dec0b",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "128f0e53-f259-411a-b4be-e050e48c199e",
-                            ConcurrencyStamp = "5759e630-5c26-4528-963c-e37a32f0fb58",
+                            ConcurrencyStamp = "90916599-5e1c-4029-95b6-2795de639a1e",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -351,15 +377,15 @@ namespace DenemeTakipAPI.Persistence.Migrations
                         {
                             Id = "c5bc8bb5-0f4f-452a-911c-9844f7e2aac7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "26e01e74-75a5-42f7-a682-f8bc16502fa6",
+                            ConcurrencyStamp = "f7053488-c18f-415f-89f7-35df3524784b",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELQcZZGsS8wkuo5QNs4fc+q2WhDhC/QKW0jqTYyU4qB1AwHj+4PFHAuexy82MVTFFw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIl8Wza3qjQKShoK5z1mJA3HHB+LtoGiYifABBupUgEByQCT9uxCoDfXHY63D/8N8g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5e1d5484-2d15-439e-b774-52ab4a11b2e4",
+                            SecurityStamp = "013c44e9-7da5-4853-be15-64b1918ab684",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -600,6 +626,25 @@ namespace DenemeTakipAPI.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("DenemeTakipAPI.Domain.Entities.DenemeFolder.UserKonu", b =>
+                {
+                    b.HasOne("DenemeTakipAPI.Domain.Entities.DenemeFolder.Konu", "Konu")
+                        .WithMany("UserKonular")
+                        .HasForeignKey("KonuId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DenemeTakipAPI.Domain.Entities.Identity.AppUser", "User")
+                        .WithMany("UserKonular")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Konu");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("KonuTytDeneme", b =>
                 {
                     b.HasOne("DenemeTakipAPI.Domain.Entities.DenemeFolder.Konu", null)
@@ -686,11 +731,18 @@ namespace DenemeTakipAPI.Persistence.Migrations
                     b.Navigation("Konular");
                 });
 
+            modelBuilder.Entity("DenemeTakipAPI.Domain.Entities.DenemeFolder.Konu", b =>
+                {
+                    b.Navigation("UserKonular");
+                });
+
             modelBuilder.Entity("DenemeTakipAPI.Domain.Entities.Identity.AppUser", b =>
                 {
                     b.Navigation("AytDenemes");
 
                     b.Navigation("TytDenemes");
+
+                    b.Navigation("UserKonular");
                 });
 #pragma warning restore 612, 618
         }

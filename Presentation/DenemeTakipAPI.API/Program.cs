@@ -22,7 +22,6 @@ var configurationBuilder = new ConfigurationBuilder();
 configurationBuilder.AddEnvironmentVariables();
 Env.Load();
 builder.Configuration.AddConfiguration(configurationBuilder.Build());
-
 builder.Services.AddControllers(options=>options.Filters.Add<ValidationFilters>())
     .AddFluentValidation(configuration=>configuration.RegisterValidatorsFromAssemblyContaining<CreateTytValidators>())
     .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true)

@@ -16,7 +16,6 @@ namespace DenemeTakipAPI.Persistence
             get
             {
                 Env.Load(); 
-
                 var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__PostgreSQL");
 
                 if (string.IsNullOrEmpty(connectionString))

@@ -15,8 +15,8 @@ namespace DenemeTakipAPI.Persistence
         {
 
             DbContextOptionsBuilder<denemeTakipAPIDbContext> dbContextOptionsBuilder = new();
-            //dbContextOptionsBuilder.UseNpgsql("User ID=postgres;Password=123456;Host=localhost;Port=5432;Database=denemeTakipDatabase;");
-            dbContextOptionsBuilder.UseNpgsql(Configuration.ConnectionString);
+            dbContextOptionsBuilder.UseNpgsql("User ID=postgres;Password=123456;Host=localhost;Port=5432;Database=denemeTakipDatabase;");
+            //dbContextOptionsBuilder.UseNpgsql(Configuration.ConnectionString);
             //dbContextOptionsBuilder.UseMySQL(Configuration.MySQLConnectionString);
 
             return new(dbContextOptionsBuilder.Options);

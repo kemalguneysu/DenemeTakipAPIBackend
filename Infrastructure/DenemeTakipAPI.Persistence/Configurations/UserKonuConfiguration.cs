@@ -22,6 +22,8 @@ namespace DenemeTakipAPI.Persistence.Configurations
                  .WithMany(u => u.UserKonular)
                  .HasForeignKey(u => u.UserId)
                  .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasIndex(u => new { u.UserId, u.KonuId}).IsUnique();
         }
     }
 }

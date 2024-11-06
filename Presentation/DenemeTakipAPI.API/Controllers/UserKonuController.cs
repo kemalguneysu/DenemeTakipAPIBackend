@@ -22,9 +22,9 @@ namespace DenemeTakipAPI.API.Controllers
 
         [HttpPost("[action]")]
 
-        public async Task<IActionResult> CreateOrUpdateUserKonu(CreateOrUpdateUserKonuCommandRequest createOrUpdateUserKonuCommandRequest)
+        public async Task<IActionResult> CreateUserKonu(CreateUserKonuCommandRequest createOrUpdateUserKonuCommandRequest)
         {
-            CreateOrUpdateUserKonuCommandResponse response = await _mediator.Send(createOrUpdateUserKonuCommandRequest);
+            CreateUserKonuCommandResponse response = await _mediator.Send(createOrUpdateUserKonuCommandRequest);
             return Ok(response);
         }
     }

@@ -17,6 +17,8 @@ namespace DenemeTakipAPI.SignalR
             serviceCollection.AddTransient<IKonuHubService, KonuHubService>();
             serviceCollection.AddTransient<ITytHubService, TytHubService>();
             serviceCollection.AddTransient<IDersHubService, DersHubService>();
+            serviceCollection.AddTransient<IUserKonuHubService, UserKonuHubService>();
+
 
             serviceCollection.AddTransient<IUserHubService, UserHubService>();
             serviceCollection.AddSignalR();

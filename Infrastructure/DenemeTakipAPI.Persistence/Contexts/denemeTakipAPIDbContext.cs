@@ -24,8 +24,10 @@ namespace DenemeTakipAPI.Persistence.Contexts
         public DbSet<TytDeneme> TytDenemes { get; set; }
         public DbSet<Konu> Konular { get; set; }
         public DbSet<Ders> Dersler { get; set; }
+        public DbSet<UserKonu> UserKonular { get; set; }
 
-        
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             

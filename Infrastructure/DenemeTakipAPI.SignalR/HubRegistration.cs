@@ -17,6 +17,8 @@ namespace DenemeTakipAPI.SignalR
             webApplication.MapHub<KonuHub>("/konu-hub");
             webApplication.MapHub<DersHub>("/ders-hub");
             webApplication.MapHub<UserHub>("/user-hub");
+            webApplication.MapHub<UserKonuHub>("/userKonu-hub");
+
 
         }
     }

@@ -375,19 +375,45 @@ namespace DenemeTakipAPI.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserKonular",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    KonuId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserKonular", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserKonular_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserKonular_Konular_KonuId",
+                        column: x => x.KonuId,
+                        principalTable: "Konular",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "128f0e53-f259-411a-b4be-e050e48c199e", "5759e630-5c26-4528-963c-e37a32f0fb58", "user", "USER" },
-                    { "a55c5f9f-4f8c-4848-882f-0bcb3ec62171", "8c181708-6feb-4999-8173-24646a476851", "admin", "ADMIN" }
+                    { "128f0e53-f259-411a-b4be-e050e48c199e", "90916599-5e1c-4029-95b6-2795de639a1e", "user", "USER" },
+                    { "a55c5f9f-4f8c-4848-882f-0bcb3ec62171", "7531cfe8-d4bf-46f2-a2f7-9ab0237dec0b", "admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToken", "RefreshTokenEndDate", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "c5bc8bb5-0f4f-452a-911c-9844f7e2aac7", 0, "26e01e74-75a5-42f7-a682-f8bc16502fa6", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAELQcZZGsS8wkuo5QNs4fc+q2WhDhC/QKW0jqTYyU4qB1AwHj+4PFHAuexy82MVTFFw==", null, false, null, null, "5e1d5484-2d15-439e-b774-52ab4a11b2e4", false, "admin" });
+                values: new object[] { "c5bc8bb5-0f4f-452a-911c-9844f7e2aac7", 0, "f7053488-c18f-415f-89f7-35df3524784b", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAIAAYagAAAAEIl8Wza3qjQKShoK5z1mJA3HHB+LtoGiYifABBupUgEByQCT9uxCoDfXHY63D/8N8g==", null, false, null, null, "013c44e9-7da5-4853-be15-64b1918ab684", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -465,6 +491,17 @@ namespace DenemeTakipAPI.Persistence.Migrations
                 name: "IX_TytDenemes_UserId",
                 table: "TytDenemes",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserKonular_KonuId",
+                table: "UserKonular",
+                column: "KonuId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserKonular_UserId_KonuId",
+                table: "UserKonular",
+                columns: new[] { "UserId", "KonuId" },
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -501,22 +538,25 @@ namespace DenemeTakipAPI.Persistence.Migrations
                 name: "KonuTytDeneme1");
 
             migrationBuilder.DropTable(
+                name: "UserKonular");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AytDenemes");
 
             migrationBuilder.DropTable(
-                name: "Konular");
-
-            migrationBuilder.DropTable(
                 name: "TytDenemes");
 
             migrationBuilder.DropTable(
-                name: "Dersler");
+                name: "Konular");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Dersler");
         }
     }
 }
