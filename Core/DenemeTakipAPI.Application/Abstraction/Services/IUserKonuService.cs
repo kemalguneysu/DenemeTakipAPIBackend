@@ -11,5 +11,6 @@ namespace DenemeTakipAPI.Application.Abstraction.Services
     public interface IUserKonuService
     {
         Task CreateUserKonuAsync(List<string> konuIds);
+        Task<GetUserKonular> GetUserKonular(int? page, int? size, string? dersId);
     }
 }
