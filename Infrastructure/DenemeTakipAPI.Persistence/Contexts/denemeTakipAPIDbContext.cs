@@ -3,6 +3,7 @@ using DenemeTakipAPI.Domain.Entities.DenemeFolder;
 using DenemeTakipAPI.Domain.Entities.DenemeFolder.AytFolder;
 using DenemeTakipAPI.Domain.Entities.DenemeFolder.TytFolder;
 using DenemeTakipAPI.Domain.Entities.Identity;
+using DenemeTakipAPI.Domain.Entities.ToDo;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -25,8 +26,7 @@ namespace DenemeTakipAPI.Persistence.Contexts
         public DbSet<Konu> Konular { get; set; }
         public DbSet<Ders> Dersler { get; set; }
         public DbSet<UserKonu> UserKonular { get; set; }
-
-
+        public DbSet<ToDoElement> ToDoElements{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

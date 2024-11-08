@@ -18,6 +18,8 @@ namespace DenemeTakipAPI.SignalR
             webApplication.MapHub<DersHub>("/ders-hub");
             webApplication.MapHub<UserHub>("/user-hub");
             webApplication.MapHub<UserKonuHub>("/userKonu-hub");
+            webApplication.MapHub<ToDoElementHub>("/toDoElement-hub");
+
 
 
         }

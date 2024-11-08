@@ -1,4 +1,5 @@
 ﻿using DenemeTakipAPI.Application.Abstraction.Services;
+using DenemeTakipAPI.Application.Repositories;
 using DenemeTakipAPI.Application.Repositories.AytRepository;
 using DenemeTakipAPI.Application.Repositories.DersRepository;
 using DenemeTakipAPI.Application.Repositories.KonuRepository;
@@ -9,6 +10,7 @@ using DenemeTakipAPI.Persistence.Contexts;
 using DenemeTakipAPI.Persistence.Repositories.AytRepository;
 using DenemeTakipAPI.Persistence.Repositories.DersRepository;
 using DenemeTakipAPI.Persistence.Repositories.KonuRepository;
+using DenemeTakipAPI.Persistence.Repositories.ToDoElement;
 using DenemeTakipAPI.Persistence.Repositories.TytRepository;
 using DenemeTakipAPI.Persistence.Repositories.UserKonuRepository;
 using DenemeTakipAPI.Persistence.Services;
@@ -57,6 +59,9 @@ namespace DenemeTakipAPI.Persistence
             services.AddScoped<IUserKonuReadRepository, UserKonuReadRepository>();
             services.AddScoped<IUserKonuWriteRepository, UserKonuWriteRepository>();
 
+            services.AddScoped<IToDoElementReadRepository, ToDoElementReadRepository>();
+            services.AddScoped<IToDoElementWriteRepository, ToDoElementWriteRepository>();
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
 
@@ -65,6 +70,7 @@ namespace DenemeTakipAPI.Persistence
             services.AddScoped<ITytService, TytService>();
             services.AddScoped<IDersService, DersService>();
             services.AddScoped<IUserKonuService, UserKonuService>();
+            services.AddScoped<IToDoElementService, ToDoElementService>();
 
 
         }

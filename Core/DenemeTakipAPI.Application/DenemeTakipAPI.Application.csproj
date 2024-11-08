@@ -26,4 +26,9 @@
     <ProjectReference Include="..\DenemeTakipAPI.Domain\DenemeTakipAPI.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Commands\ToDoElement\" />
+    <Folder Include="Features\Queries\ToDoElement\" />
+  </ItemGroup>
+
 </Project>

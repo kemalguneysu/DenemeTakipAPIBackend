@@ -31,6 +31,10 @@ namespace DenemeTakipAPI.SignalR
         public const string UserKonuUpdatedMessage = "receiveUserKonuUpdatedMessage";
         public const string UserKonuDeletedMessage = "receiveUserKonuDeletedMessage";
 
+        public const string ToDoElementAddedMessage = "receiveToDoElementAddedMessage";
+        public const string ToDoElementUpdatedMessage = "receiveToDoElementUpdatedMessage";
+        public const string ToDoElementDeletedMessage = "receiveToDoElementDeletedMessage";
+
 
     }
 }
