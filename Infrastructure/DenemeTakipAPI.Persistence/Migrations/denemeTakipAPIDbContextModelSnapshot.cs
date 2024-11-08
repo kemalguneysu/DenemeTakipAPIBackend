@@ -290,14 +290,14 @@ namespace DenemeTakipAPI.Persistence.Migrations
                         new
                         {
                             Id = "a55c5f9f-4f8c-4848-882f-0bcb3ec62171",
-                            ConcurrencyStamp = "468d7d30-af1a-4c79-b9dd-d6645bcbfb70",
+                            ConcurrencyStamp = "b7fe463d-e9c6-4455-8c7d-de6b13a68a0b",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "128f0e53-f259-411a-b4be-e050e48c199e",
-                            ConcurrencyStamp = "d21486eb-a7ca-4827-b78e-498ec1dac644",
+                            ConcurrencyStamp = "150f49ab-5d6f-448e-99bb-c4c3dff9af57",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -377,15 +377,15 @@ namespace DenemeTakipAPI.Persistence.Migrations
                         {
                             Id = "c5bc8bb5-0f4f-452a-911c-9844f7e2aac7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3850d800-d902-4870-bc6b-a2d19d5c5569",
+                            ConcurrencyStamp = "ee4b3c3d-04de-4afd-8583-92b430f5047b",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEI4KgdXx6No6S7CgPkBWD6AiD8L1LfglLV7T+mqkfK7kvDaxbHxg7EY3mCrVHYR+zw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGkKoFcFfQX9HFOChzkUPLUWfapDN32uFuZGKL6Knni38kHAocxOmVutbrKygzPqHQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4a5ac45f-a067-4bd4-a871-a586437ae576",
+                            SecurityStamp = "b013d024-95fb-4b1f-a677-13724cb5b61f",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -402,6 +402,9 @@ namespace DenemeTakipAPI.Persistence.Migrations
 
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("boolean");
+
+                    b.Property<DateTime>("ToDoDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ToDoElementTitle")
                         .IsRequired()

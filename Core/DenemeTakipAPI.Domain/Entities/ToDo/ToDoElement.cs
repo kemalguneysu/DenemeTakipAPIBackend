@@ -14,5 +14,7 @@ namespace DenemeTakipAPI.Domain.Entities.ToDo
         public AppUser User{ get; set; }
         public string ToDoElementTitle { get; set; }
         public bool IsCompleted{ get; set; }
+        public DateOnly ToDoDate { get; set; }
+
     }
 }
