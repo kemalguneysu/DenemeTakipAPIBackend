@@ -20,7 +20,10 @@ namespace DenemeTakipAPI.Application.Features.Queries.ToDoElement.GetToDoElement
 
         public async Task<GetToDoElementQueryResponse> Handle(GetToDoElementQueryRequest request, CancellationToken cancellationToken)
         {
-            var response=await _toDoElementService.GetToDoElements(request.ToDoDate,request.IsCompleted);
+            if (request.ToDoDateStart > request.ToDoDateEnd)
+                throw new Exception("Başlangıç tarihi bitiş tarihinden büyük olamaz.");
+            
+            var response=await _toDoElementService.GetToDoElements(request.ToDoDateStart,request.ToDoDateEnd,request.IsCompleted);
             return new()
             {
                 ToDoElements = response.ToDoElements,

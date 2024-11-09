@@ -20,7 +20,7 @@ namespace DenemeTakipAPI.Persistence.Migrations
                     ToDoElementTitle = table.Column<string>(type: "text", nullable: false),
                     IsCompleted = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ToDoDate = table.Column<DateOnly>(type: "timestamp with time zone", nullable: false)
+                    ToDoDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {

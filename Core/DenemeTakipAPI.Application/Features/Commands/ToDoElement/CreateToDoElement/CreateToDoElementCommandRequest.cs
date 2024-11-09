@@ -10,7 +10,7 @@ namespace DenemeTakipAPI.Application.Features.Commands.ToDoElement.CreateToDoEle
     public class CreateToDoElementCommandRequest:IRequest<CreateToDoElementCommandResponse>
     {
         public string ToDoElementTitle { get; set; }
-        public DateOnly ToDoDate { get; set; }
+        public DateTime ToDoDate { get; set; }
         public bool IsCompleted { get; set; }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using DenemeTakipAPI.Application.Features.Commands.ToDoElement.CreateToDoElement;
+using DenemeTakipAPI.Application.Features.Commands.ToDoElement.DeleteToDoElement;
+using DenemeTakipAPI.Application.Features.Commands.ToDoElement.UpdateToDoElement;
 using DenemeTakipAPI.Application.Features.Commands.UserKonu.CreateOrUpdate;
 using DenemeTakipAPI.Application.Features.Queries.ToDoElement.GetToDoElement;
 using DenemeTakipAPI.Application.Features.Queries.ToDoElement.GetToDoElements;
@@ -36,6 +38,20 @@ namespace DenemeTakipAPI.API.Controllers
             CreateToDoElementCommandResponse response = await _mediator.Send(createOrUpdateToDoElementCommandRequest);
             return Ok(response);
         }
-        
+        [HttpPost("[action]")]
+
+        public async Task<IActionResult> UpdateToDoElement(UpdateToDoElementCommandRequest UpdateToDoElementCommandRequest)
+        {
+            UpdateToDoElementCommandResponse response = await _mediator.Send(UpdateToDoElementCommandRequest);
+            return Ok(response);
+        }
+        [HttpDelete("[action]")]
+
+        public async Task<IActionResult> DeleteToDoElement(DeleteToDoElementCommandRequest DeleteToDoElementCommandRequest)
+        {
+            DeleteToDoElementCommandResponse response = await _mediator.Send(DeleteToDoElementCommandRequest);
+            return Ok(response);
+        }
+
     }
 }

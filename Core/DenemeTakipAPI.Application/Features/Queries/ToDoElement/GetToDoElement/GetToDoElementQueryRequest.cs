@@ -10,7 +10,9 @@ namespace DenemeTakipAPI.Application.Features.Queries.ToDoElement.GetToDoElement
 {
     public class GetToDoElementQueryRequest:IRequest<GetToDoElementQueryResponse>
     {
-        public DateOnly ToDoDate { get; set; }
+        public DateTime ToDoDateStart { get; set; }
+        public DateTime ToDoDateEnd { get; set; }
+
         public bool? IsCompleted { get; set; }
     }
 }
